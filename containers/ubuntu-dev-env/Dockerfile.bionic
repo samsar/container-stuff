@@ -1,0 +1,17 @@
+FROM ubuntu:18.04
+
+# Install Packages
+RUN apt-get update && apt-get install -y \
+  git \
+  && rm -rf /var/lib/apt/lists/*
+
+# Create User
+ARG APP_USER=vscode
+ARG APP_GROUP=staff
+RUN adduser --system --ingroup $APP_GROUP $APP_USER
+
+# Switch User
+USER $APP_USER
+
+# Run Command
+CMD ["bash"]
